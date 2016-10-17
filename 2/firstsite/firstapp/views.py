@@ -1,6 +1,6 @@
-from django.shortcuts import render,HttpResponse
-from firstapp.models import People
-from django.template import Context,Template
+from django.shortcuts import render, HttpResponse
+from firstapp.models import People, Article
+from django.template import Context, Template
 # Create your views here.
 def first_try(request):
 	person=People(name='zhangzhuqian',job='officer')
@@ -20,8 +20,14 @@ def first_try(request):
 			</body>
 	</html>
 	'''
-
-	t= Template(html_string)
-	c=Context({'person':person})
-	web_page=t.render(c)
+	t = Template(html_string)
+	c = Context({'person': person})
+	web_page = t.render(c)
 	return HttpResponse(web_page)
+
+ def index(request):
+	context = {}
+	article_List = Article.objects.all()
+	context['article_List'] = article_List
+	index_page = render(request, 'Bloger.html', context)
+	return index_page
