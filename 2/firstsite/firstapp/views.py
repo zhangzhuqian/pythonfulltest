@@ -25,9 +25,9 @@ def first_try(request):
 	web_page = t.render(c)
 	return HttpResponse(web_page)
 
- def index(request):
+def index(request):
 	context = {}
 	article_List = Article.objects.all()
 	context['article_List'] = article_List
-	index_page = render(request, 'Bloger.html', context)
+	index_page = render(request, 'firstapp/template/Bloger.html', context)
 	return index_page
